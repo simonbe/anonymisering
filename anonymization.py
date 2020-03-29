@@ -20,7 +20,7 @@ class anonymize_swe:
         self._all_names.extend(names_f)
         self._all_names.extend(names_efternamn)
 
-        self._tokenizer = nltk.data.load('tokenizers/punkt/swedish.pickle')
+        self._tokenizer = nltk.data.load('nltk:tokenizers/punkt/swedish.pickle')
 
         # by default not using advanced regex for phone numbers - only removing any long numbers
         self._regexPhoneNumberComplex = re.compile(r'^([+]46)\s*(7[0236])\s*(\d{4})\s*(\d{3})$')
@@ -43,16 +43,29 @@ class anonymize_swe:
         with open(filename, 'rt') as csvfile:
             readr = csv.reader(csvfile, delimiter=' ', quotechar='|')
             for row in readr:
-                data.append(row[0])
+                if len(row)>0:
+                    data.append(row[0])
 
         return data
+
+    def checkWord(self,word):
+        
+        # check if contains any keyword (default this only checks for names)
+        if word in self._all_names:
+            return { 'data':'NAME', 'index':1 }
+        elif '@' in word:
+            return { 'data':'EMAIL', 'index':2 }
+        elif self.__containsPhoneNumber(word):
+            return { 'data':'PHONE', 'index':3 }
+        
+        return { 'data': word, 'index': 0 }
 
     def textRemoveSentences(self,text,keywords,ignored):
         # returns new text and removed sentences
         removedSentences = []
 
         # counts
-        removedTypes = { 'Name&Email&Phone': 0, 'Name&Email': 0, 'Name&Phone':0,'Name':0,'EmailPhone':0,'Email':0,'Phone':0 }
+        removedTypes = { 'Name&Email&Phone': 0, 'Name&Email': 0, 'Name&Phone':0,'Name':0,'Email&Phone':0,'Email':0,'Phone':0 }
 
         finalText = ''
 
@@ -82,7 +95,7 @@ class anonymize_swe:
 
                             # but skip if the word is first in sentence ('Dina kompetenser ar...') - this will still get found by second word ('Dina Svensson är ...')
                             if words[0] == k:
-                                doNotUse = False;
+                                doNotUse = False
 
                     # check if contains e-mail
                     if '@' in s:
@@ -121,14 +134,14 @@ class anonymize_swe:
 
         return [finalText, removedSentences, removedTypes]
 
-    def anonymizeText(self, str, extraKeywords = [], ignoredSentences = []):
+    def anonymizeText(self, s, extraKeywords = [], ignoredSentences = []):
         newStr = ""
 
         allKeywords = []
         allKeywords.extend(self._all_names) # names by default
         allKeywords.extend(extraKeywords)
 
-        res = self.textRemoveSentences(str,allKeywords, ignoredSentences)
-        print(res)
+        res = self.textRemoveSentences(s,allKeywords, ignoredSentences)
+        #print(res)
 
         return res

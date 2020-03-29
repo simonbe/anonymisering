@@ -10,7 +10,7 @@ ignoredSentences = [] # any sentences forced to keep (default: empty)
 with open('input.txt') as f:
     allText = f.read()
 
-print('Input text:\n' + allText);
+print('Input text:\n' + allText)
 
 res = anonymize.anonymizeText(allText,extraKeywords,ignoredSentences)
 
@@ -18,8 +18,8 @@ output = res[0]
 removedSentences = res[1]
 removedCounts = res[2]
 
-print('\n\nOutput text:\n' + output);
-print('\n\nRemoved sentences:\n' + ''.join(removedSentences));
+print('\n\nOutput text:\n' + output)
+print('\n\nRemoved sentences:\n' + ''.join(removedSentences))
 print('\n\nRemoval counts:\n' + str(removedCounts))
 
 with open("output.txt", "w") as f:
