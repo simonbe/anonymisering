@@ -1,1 +1,1 @@
-{'Name&Email&Phone': 0, 'Name&Email': 1, 'Name&Phone': 0, 'Name': 3, 'EmailPhone': 0, 'Email': 1, 'Phone': 1}
+{'Name&Email&Phone': 0, 'Name&Email': 1, 'Name&Phone': 0, 'Name': 3, 'Email&Phone': 0, 'Email': 1, 'Phone': 1}

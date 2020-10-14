@@ -2,18 +2,20 @@
 # - removes entire sentences which contain phone numbers, email adresses, names or other manually defined keywords
 # - uses nltk for Swedish tokenization
 # - files with most common Swedish names in 'names' directory
-
+import os
 import re
 import csv
 import nltk.data
 
 class anonymize_swe:
 
+    currentdir = os.path.dirname(os.path.realpath(__file__))
+
     def initialize(self):
         # load names
-        names_m = self.__load_csv('names/names_m.csv')
-        names_f = self.__load_csv('names/names_f.csv')
-        names_efternamn = self.__load_csv('names/names_efternamn100.csv')
+        names_m = self.__load_csv(self.currentdir + '/names/names_m.csv')
+        names_f = self.__load_csv(self.currentdir + '/names/names_f.csv')
+        names_efternamn = self.__load_csv(self.currentdir + '/names/names_efternamn100.csv')
 
         self._all_names = []
         self._all_names.extend(names_m)
@@ -89,7 +91,7 @@ class anonymize_swe:
 
                     # check if contains any keyword (default this only checks for names)
                     for k in keywords:
-                        if k in words:
+                        if k in words or (len(k.split(' ')) > 1 and k in s):
                             doNotUse = True
                             containsName = True
 

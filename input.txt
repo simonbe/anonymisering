@@ -1,3 +1,3 @@
-Start rad 1. Lars Magnus Ericsson var son till hemmansägaren Erik Ericsson (1804–1858) från Vegerbol i Värmskog. Slut rad 1.
-Start rad 2. Hej! Mitt namn är Adam Svensson. Min epost-adress är adam@svensson.se. Du kan nå mig på telefon 0702-123456. Slut rad 2.
-Start rad 3. Var god kontakta Abbe på lagret. Eller Ibrahim på ibra@sweco.se. Slut rad 3.
+Start rad 1. Lars Magnus Ericsson var son till hemmansÃ¤garen Erik Ericsson (1804Â–1858) frÃ¥n Vegerbol i VÃ¤rmskog. Slut rad 1.
+Start rad 2. Hej! Mitt namn Ã¤r Adam Svensson. Min epost-adress Ã¤r adam@svensson.se. Du kan nÃ¥ mig pÃ¥ telefon 0702-123456. Slut rad 2.
+Start rad 3. Var god kontakta Abbe pÃ¥ lagret. Eller Ibrahim pÃ¥ ibra@sweco.se. Slut rad 3.
